@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Nuril91\ChuckNorrisJokes\Facades;
-
 
 use Illuminate\Support\Facades\Facade;
 
