@@ -15,7 +15,7 @@ class JokeFactoryTest extends TestCase
     public function it_returns_a_random_joke()
     {
         $mock = new MockHandler([
-            new Response(200, [], '{"type": "success", "value": {"id": 280, "joke": "When Chuck Norris works out on the Total Gym, the Total Gym feels like it\'s been raped.", "categories": [] } }')
+            new Response(200, [], '{"type": "success", "value": {"id": 280, "joke": "When Chuck Norris works out on the Total Gym, the Total Gym feels like it\'s been raped.", "categories": [] } }'),
         ]);
 
         $handlerStack = HandlerStack::create($mock);

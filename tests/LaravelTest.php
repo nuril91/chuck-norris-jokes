@@ -1,13 +1,10 @@
 <?php
 
-
 namespace Nuril91\ChuckNorrisJokes\Tests;
-
 
 use Illuminate\Support\Facades\Artisan;
 use Nuril91\ChuckNorrisJokes\ChuckNorrisJokesServiceProvider;
 use Nuril91\ChuckNorrisJokes\Facades\ChuckNorris;
-use Nuril91\ChuckNorrisJokes\Console\ChuckNorrisJoke;
 use Nuril91\ChuckNorrisJokes\Models\Joke;
 use Orchestra\Testbench\TestCase;
 
@@ -16,20 +13,20 @@ class LaravelTest extends TestCase
     protected function getPackageProviders($app)
     {
         return [
-            ChuckNorrisJokesServiceProvider::class
+            ChuckNorrisJokesServiceProvider::class,
         ];
     }
 
     protected function getPackageAliases($app)
     {
         return [
-            'ChuckNorris' => ChuckNorris::class
+            'ChuckNorris' => ChuckNorris::class,
         ];
     }
 
     protected function getEnvironmentSetUp($app)
     {
-        include_once __DIR__ . '/../database/migrations/create_jokes_table.php.stub';
+        include_once __DIR__.'/../database/migrations/create_jokes_table.php.stub';
 
         (new \CreateJokesTable)->up();
     }

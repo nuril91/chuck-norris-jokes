@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Nuril91\ChuckNorrisJokes\Console;
-
 
 use Illuminate\Console\Command;
 use Nuril91\ChuckNorrisJokes\Facades\ChuckNorris;
