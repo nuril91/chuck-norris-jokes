@@ -2,6 +2,10 @@
 
 namespace Nuril91\ChuckNorrisJokes\Tests;
 
+use GuzzleHttp\Client;
+use GuzzleHttp\Handler\MockHandler;
+use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Psr7\Response;
 use Nuril91\ChuckNorrisJokes\JokeFactory;
 use PHPUnit\Framework\TestCase;
 
@@ -10,28 +14,18 @@ class JokeFactoryTest extends TestCase
     /** @test */
     public function it_returns_a_random_joke()
     {
-        $jokes = new JokeFactory([
-            'This is a joke',
+        $mock = new MockHandler([
+            new Response(200, [], '{"type": "success", "value": {"id": 280, "joke": "When Chuck Norris works out on the Total Gym, the Total Gym feels like it\'s been raped.", "categories": [] } }')
         ]);
 
-        $joke = $jokes->getRandomJoke();
+        $handlerStack = HandlerStack::create($mock);
 
-        $this->assertSame('This is a joke', $joke);
-    }
+        $client = new Client(['handler' => $handlerStack]);
 
-    /** @test */
-    public function it_returns_a_predefined_joke()
-    {
-        $chuckNorrisJokes = [
-            'Chuck Norris\' tears cure cancer. Too bad he has never cried.',
-            'Chuck Norris counted to infinity... Twice.',
-            'If you can see Chuck Norris, he can see you. If you can\'t see Chuck Norris you may be only seconds away from death.',
-        ];
-
-        $jokes = new JokeFactory();
+        $jokes = new JokeFactory($client);
 
         $joke = $jokes->getRandomJoke();
 
-        $this->assertContains($joke, $chuckNorrisJokes);
+        $this->assertSame('When Chuck Norris works out on the Total Gym, the Total Gym feels like it\'s been raped.', $joke);
     }
 }
